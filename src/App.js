@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Form from "./components/Form";
+import PackingList from "./components/PackingList";
 
-function App() {
+export default function App() {
+  const [cards, setCards] = useState([]);
+  const [sortBy, setSortBy] = useState("all");
+
+
+  function handleCardsData(cards) {
+    setCards(cards);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>To-Do List</h1>
+      <Form
+        cards={cards}
+        onCardsChange={handleCardsData}
+        onSorted={setSortBy}
+      />
+      <PackingList
+        sortBy={sortBy}
+        cards={cards}
+        onCardsChange={handleCardsData}
+      />
     </div>
   );
 }
-
-export default App;
